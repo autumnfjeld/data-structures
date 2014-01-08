@@ -7,9 +7,11 @@ var makeQueue = function(){
   // Implement the methods below
 
   instance.enqueue = function(value){
+    size++;
   };
 
   instance.dequeue = function(){
+    size && size--;
   };
 
   instance.size = function(){
