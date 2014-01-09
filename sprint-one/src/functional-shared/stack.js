@@ -3,8 +3,8 @@ var makeStack = function() {
   var instance = {};
 
   // Use an object with numeric keys to store values
-  storage = {};
-  size = 0;
+  instance._storage = {};
+  instance._size = 0;
   /* START PROMPT
     var size; // Hint: set an initial value here
   -END PROMPT */
@@ -23,19 +23,19 @@ var extend = function(to, from){
 var stackMethods = {};
 
 stackMethods.push = function(value){
-  size++;
-  storage[size] = value;
+  this._size++;
+  this._storage[this._size] = value;
 };
 
 stackMethods.pop = function(){
-  if (size){
-    var temp = storage[size];
-    delete storage[size];
-    size--;
+  if (this._size){
+    var temp = this._storage[this._size];
+    delete this._storage[this._size];
+    this._size--;
     return temp;
   }
 };
 
 stackMethods.size = function(){
-  return size;
+  return this._size;
 };
