@@ -18,12 +18,22 @@ treeMethods.addChild = function(value){
 };
 
 treeMethods.contains = function(target){
-  for(var i = 0; i < this.children.length; i++) {
-    if(target === this.children[i].value) {
-      return true;
+  var result = false;
+  var recursiveSearch = function(node, target) {
+    for(var i = 0; i < node.children.length; i++) {
+      if(target === node.children[i].value) {
+        result = true;
+      } else {
+        if(node.children[i].children !== undefined) {
+          recursiveSearch(node.children[i], target);
+        }
+      }
     }
+  };
+  if(this.children !== undefined) {
+    recursiveSearch(this, target);
   }
-  return false;
+  return result;
 };
 
 var extend = function(to, from){
