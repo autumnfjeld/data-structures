@@ -13,14 +13,13 @@ var makeLinkedList = function(){
       list.tail.next = node;
     }
     list.tail = node;
-    // console.log('head', list.head, 'tail', list.tail);
   };
 
   list.removeHead = function(value){
     var newHead = list.head.next;
     list.head = newHead;
     return newHead;
-  }
+  };
 
   list.contains = function(value){
     var found = false;
@@ -29,7 +28,6 @@ var makeLinkedList = function(){
     }
 
     var search = function(node){
-      console.log('searching', node);
       if (node){
         if (node.value === value){
           found = true;
@@ -42,7 +40,6 @@ var makeLinkedList = function(){
     };
 
     search(list.head.next)
-    console.log(value, found);
     return found;
   };
 
@@ -50,7 +47,6 @@ var makeLinkedList = function(){
 };
 
 var makeNode = function(value){
-
   var node = {};
   node.value = value;
   node.next = null;
