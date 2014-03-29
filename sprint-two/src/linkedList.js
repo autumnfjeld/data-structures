@@ -1,47 +1,60 @@
+// A linked list class in functional style
+
 var makeLinkedList = function(){
   var list = {};
   list.head = null;
   list.tail = null;
 
   list.addToTail = function(value){
-    var newNode = makeNode(value);
-    if(list.head === null && list.tail === null) {
-      list.head = newNode;
+    var node = makeNode(value);
+    if (!list.head){
+      list.head = node;
+    }else{
+      list.tail.next = node;
     }
-    else {
-      list.tail.next = newNode;
-    }
-    list.tail = newNode;
+    list.tail = node;
+    // console.log('head', list.head, 'tail', list.tail);
   };
 
-  list.removeHead = function(){
+  list.removeHead = function(value){
     var newHead = list.head.next;
-    delete(list.head);
     list.head = newHead;
-  };
+    return newHead;
+  }
 
-  list.contains = function(target, node){
-    if(node === undefined) {
-      node = list.head;
-    }
-    if(node.value === target) {
+  list.contains = function(value){
+    var found = false;
+    if (list.head.value === value){
       return true;
     }
-    else {
-      if(node.next === null) {
-        return false;
+
+    var search = function(node){
+      console.log('searching', node);
+      if (node){
+        if (node.value === value){
+          found = true;
+          return;
+        }
+        search(node.next);
+      }else{
+        return found;
       }
-      return list.contains(target, node.next);
-    }
+    };
+
+    search(list.head.next)
+    console.log(value, found);
+    return found;
   };
 
   return list;
 };
 
 var makeNode = function(value){
+
   var node = {};
   node.value = value;
   node.next = null;
-
   return node;
 };
+
+
